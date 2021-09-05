@@ -1,0 +1,13 @@
+.Main {
+  background-color: #fff;
+}
+
+.header {
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+
+  &__logo {
+    height: 50px;
+  }
+}
