@@ -8,9 +8,26 @@ body {
 .header {
   height: 10vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
 
   &__logo {
     height: 50px;
+  }
+
+  &__nav {
+    display: flex;
+
+    &__icon {
+      list-style-type: none;
+
+      &__img {
+        height: 30px;
+      }
+    }
   }
 }

@@ -1,5 +1,8 @@
 import React from "react";
+import search from "./static/search.svg";
 import cart from "./cart.svg";
+import monstera from "./static/monstera.jpg";
+
 import "./Sass/Base.scss";
 import Item from "./Item.js";
 
@@ -17,7 +20,27 @@ function App(props) {
   return (
     <main className="main">
       <header className="header">
-        <img src={cart} className="header__logo" alt="logo" />
+        <div className="header__wrapper">
+          <img src={monstera} className="header__logo" alt="logo" />
+          <h1>FIDDLE LEAF</h1>
+        </div>
+
+        <ul className="header__nav">
+          <li className="header__nav__icon">
+            <img
+              className="header__nav__icon__img"
+              src={search}
+              alt="search icon"
+            />
+          </li>
+          <li className="header__nav__icon">
+            <img
+              className="header__nav__icon__img"
+              src={cart}
+              alt="cart icon"
+            />
+          </li>
+        </ul>
       </header>
       <section className="products">
         <h1 className="products__header">Products</h1>
