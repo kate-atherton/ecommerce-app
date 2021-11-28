@@ -6,9 +6,11 @@ body {
 }
 
 .header {
-  height: 10vh;
+  height: 11vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06);
 
   &__wrapper {
     display: flex;
@@ -16,17 +18,28 @@ body {
   }
 
   &__logo {
-    height: 50px;
+    height: 4rem;
+  }
+
+  &__title {
+    margin-left: 1rem;
+    font-size: 3rem;
+    font-weight: 600;
   }
 
   &__nav {
     display: flex;
+    justify-content: space-evenly;
 
     &__icon {
       list-style-type: none;
 
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+
       &__img {
-        height: 30px;
+        height: 3rem;
       }
     }
   }

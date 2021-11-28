@@ -1,9 +1,9 @@
 import React from "react";
 import search from "./static/search.svg";
-import cart from "./cart.svg";
+import cart from "./static/shopping-cart.svg";
 import monstera from "./static/monstera.jpg";
 
-import "./Sass/Base.scss";
+import "./Sass/main.scss";
 import Item from "./Item.js";
 
 function App(props) {
@@ -22,7 +22,7 @@ function App(props) {
       <header className="header">
         <div className="header__wrapper">
           <img src={monstera} className="header__logo" alt="logo" />
-          <h1>FIDDLE LEAF</h1>
+          <h1 className="header__title">FIDDLE LEAF</h1>
         </div>
 
         <ul className="header__nav">
