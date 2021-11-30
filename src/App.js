@@ -22,7 +22,7 @@ function App(props) {
       <header className="header">
         <div className="header__wrapper">
           <img src={monstera} className="header__logo" alt="logo" />
-          <h1 className="header__title">FIDDLE LEAF</h1>
+          <h1 className="header__title">ALOE ALOE</h1>
         </div>
 
         <ul className="header__nav">
