@@ -10,7 +10,7 @@ function App(props) {
   const itemList = props.items.map((item) => (
     <Item
       img={item.img}
-      description={item.description}
+      price={item.price}
       title={item.title}
       id={item.id}
       key={item.id}
