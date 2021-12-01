@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { DATA } from "./data.js";
+
+//image files
 import search from "./static/search.svg";
 import cart from "./static/shopping-cart.svg";
 import monstera from "./static/monstera.jpg";
 
+//sass
 import "./Sass/main.scss";
-import Item from "./Item.js";
+
+//components
+import Item from "./components/item.js";
+import CartItem from "./components/cartItem.js";
 
 function App(props) {
-  const itemList = props.items.map((item) => (
+  const [cartItems, setItems] = useState(props.items);
+
+  console.log(cartItems);
+
+  const cartList = cartItems.map((item) => (
+    <CartItem id={item.id} name={item.name} quantity={item.quantity} />
+  ));
+
+  console.log(cartList);
+
+  const productList = DATA.map((item) => (
     <Item
       img={item.img}
       price={item.price}
@@ -16,6 +33,18 @@ function App(props) {
       key={item.id}
     />
   ));
+
+  // function addToCart(item, quantity) {
+  //   const newCartItem = { id: item.id, title: item.title, quantity: quantity };
+  //   setItems([...cartItems, newCartItem]);
+  // }
+
+  // function removeItem(item, quantity) {
+  //   const remainingItems = cartItems.filter(
+  //     (cartItem) => item.id !== cartItem.id
+  //   );
+  //   setItems(remainingItems);
+  // }
 
   return (
     <main className="main">
@@ -44,7 +73,12 @@ function App(props) {
       </header>
       <section className="products">
         <h1 className="products__header">Products</h1>
-        <div className="products__wrapper">{itemList}</div>
+        <div className="products__wrapper">{productList}</div>
+      </section>
+
+      <section className="cart">
+        <h1 className="cart__header">Cart</h1>
+        <div className="cart__wrapper">{cartList}</div>
       </section>
     </main>
   );

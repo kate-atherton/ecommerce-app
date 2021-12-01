@@ -3,11 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { DATA } from "./data.js";
+
+const CART = [{ id: "product-1", name: "pothos", quantity: 2 }];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App items={DATA} />
+    <App items={CART} />
   </React.StrictMode>,
   document.getElementById("root")
 );

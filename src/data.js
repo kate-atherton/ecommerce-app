@@ -40,7 +40,7 @@ export const DATA = [
   {
     img: zz,
     title: "ZZ Plant",
-    id: "product-5",
+    id: "product-6",
     price: 10,
   },
 ];
