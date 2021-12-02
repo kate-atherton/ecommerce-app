@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DATA } from "./data.js";
 
 //image files
 import search from "./static/search.svg";
@@ -10,34 +9,32 @@ import monstera from "./static/monstera.jpg";
 import "./Sass/main.scss";
 
 //components
-import Item from "./components/item.js";
+import Product from "./components/product.js";
 import CartItem from "./components/cartItem.js";
 
 function App(props) {
   const [cartItems, setItems] = useState(props.items);
 
-  console.log(cartItems);
-
   const cartList = cartItems.map((item) => (
     <CartItem id={item.id} name={item.name} quantity={item.quantity} />
   ));
 
-  console.log(cartList);
+  const addToCart = (product, quantity) => {
+    console.log("Added to cart");
+    console.log(product);
+    console.log(quantity);
+  };
 
-  const productList = DATA.map((item) => (
-    <Item
-      img={item.img}
-      price={item.price}
-      title={item.title}
-      id={item.id}
-      key={item.id}
+  const productList = props.products.map((product) => (
+    <Product
+      img={product.img}
+      price={product.price}
+      title={product.title}
+      id={product.id}
+      key={product.id}
+      addToCart={addToCart}
     />
   ));
-
-  // function addToCart(item, quantity) {
-  //   const newCartItem = { id: item.id, title: item.title, quantity: quantity };
-  //   setItems([...cartItems, newCartItem]);
-  // }
 
   // function removeItem(item, quantity) {
   //   const remainingItems = cartItems.filter(

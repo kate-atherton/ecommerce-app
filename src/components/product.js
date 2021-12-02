@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function Item(props) {
-  const handleClick = () => {
-    console.log("this is:", this);
-  };
+export default function Product(props) {
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="item" id={props.id}>
@@ -15,18 +13,20 @@ export default function Item(props) {
           <label htmlFor="quantity">
             <input
               type="number"
-              defaultValue="1"
+              value={quantity}
               min="1"
               max="100"
               label="quantity"
               name="quantity"
               className="item__quantity__number"
+              onInput={(e) => setQuantity(e.target.value)}
             />
           </label>
         </form>
         <button
-          onClick={handleClick}
+          type="button"
           className="item__quantity__btn"
+          onClick={() => props.addToCart(props.id, quantity)}
         >{`Add to bag`}</button>
       </div>
     </div>
