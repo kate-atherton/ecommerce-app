@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { DATA } from "./data.js";
+
 //image files
 import search from "./static/search.svg";
 import cart from "./static/shopping-cart.svg";
@@ -9,39 +11,21 @@ import monstera from "./static/monstera.jpg";
 import "./Sass/main.scss";
 
 //components
-import Product from "./components/product.js";
-import CartItem from "./components/cartItem.js";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
 
-function App(props) {
-  const [cartItems, setItems] = useState(props.items);
+function App() {
+  const [cartItems, setItems] = useState([]);
 
-  const cartList = cartItems.map((item) => (
-    <CartItem id={item.id} name={item.name} quantity={item.quantity} />
-  ));
-
-  const addToCart = (product, quantity) => {
-    console.log("Added to cart");
-    console.log(product);
-    console.log(quantity);
+  const addToCart = (product, amount) => {
+    const newItem = { id: product, name: product, quantity: amount };
+    setItems([...cartItems, newItem]);
   };
 
-  const productList = props.products.map((product) => (
-    <Product
-      img={product.img}
-      price={product.price}
-      title={product.title}
-      id={product.id}
-      key={product.id}
-      addToCart={addToCart}
-    />
-  ));
-
-  // function removeItem(item, quantity) {
-  //   const remainingItems = cartItems.filter(
-  //     (cartItem) => item.id !== cartItem.id
-  //   );
-  //   setItems(remainingItems);
-  // }
+  const removeFromCart = (product) => {
+    const remainingItems = cartItems.filter((item) => item.id !== product);
+    setItems(remainingItems);
+  };
 
   return (
     <main className="main">
@@ -68,15 +52,9 @@ function App(props) {
           </li>
         </ul>
       </header>
-      <section className="products">
-        <h1 className="products__header">Products</h1>
-        <div className="products__wrapper">{productList}</div>
-      </section>
 
-      <section className="cart">
-        <h1 className="cart__header">Cart</h1>
-        <div className="cart__wrapper">{cartList}</div>
-      </section>
+      <Products products={DATA} addToCart={addToCart} />
+      <Cart removeFromCart={removeFromCart} cartItems={cartItems} />
     </main>
   );
 }
