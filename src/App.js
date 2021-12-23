@@ -1,31 +1,20 @@
 import React, { useState } from "react";
 
-import { DATA } from "./data.js";
-
 //image files
 import search from "./static/search.svg";
 import cart from "./static/shopping-cart.svg";
 import monstera from "./static/monstera.jpg";
 
+import { DATA } from "./data.js";
+
 //sass
 import "./Sass/main.scss";
 
 //components
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
+import View from "./components/View";
 
 function App() {
-  const [cartItems, setItems] = useState([]);
-
-  const addToCart = (product, amount) => {
-    const newItem = { id: product, name: product, quantity: amount };
-    setItems([...cartItems, newItem]);
-  };
-
-  const removeFromCart = (product) => {
-    const remainingItems = cartItems.filter((item) => item.id !== product);
-    setItems(remainingItems);
-  };
+  const [page, setPage] = useState("products");
 
   return (
     <main className="main">
@@ -41,6 +30,7 @@ function App() {
               className="header__nav__icon__img"
               src={search}
               alt="search icon"
+              onClick={() => setPage("products")}
             />
           </li>
           <li className="header__nav__icon">
@@ -48,13 +38,13 @@ function App() {
               className="header__nav__icon__img"
               src={cart}
               alt="cart icon"
+              onClick={() => setPage("cart")}
             />
           </li>
         </ul>
       </header>
 
-      <Products products={DATA} addToCart={addToCart} />
-      <Cart removeFromCart={removeFromCart} cartItems={cartItems} />
+      <View data={DATA} page={page} />
     </main>
   );
 }
