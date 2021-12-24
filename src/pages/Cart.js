@@ -17,6 +17,10 @@ export default function Cart(props) {
     <section className="cart view">
       <h1 className="cart__header view__header">Cart</h1>
       <div className="cart__wrapper">{cartList}</div>
+      <p>
+        {`Total: £`}
+        {props.total}
+      </p>
     </section>
   );
 }

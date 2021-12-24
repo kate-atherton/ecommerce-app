@@ -17,7 +17,7 @@ export default function cartItem(props) {
       <button
         type="button"
         className="cartItem__delete"
-        onClick={() => props.removeFromCart(props.id)}
+        onClick={() => props.removeFromCart(props)}
       >{`Delete`}</button>
     </div>
   );
