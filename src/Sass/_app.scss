@@ -34,6 +34,10 @@ body {
     &__icon {
       list-style-type: none;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       &:first-child {
         margin-right: 0.5rem;
       }

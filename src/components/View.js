@@ -5,8 +5,14 @@ import Cart from "../pages/Cart";
 export default function View(props) {
   const [cartItems, setItems] = useState([]);
 
-  const addToCart = (product, amount) => {
-    const newItem = { id: product, name: product, quantity: amount };
+  const addToCart = (id, img, price, title, quantity) => {
+    const newItem = {
+      id: id,
+      img: img,
+      price: price,
+      title: title,
+      quantity: quantity,
+    };
     setItems([...cartItems, newItem]);
   };
 

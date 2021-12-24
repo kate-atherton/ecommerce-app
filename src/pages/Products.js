@@ -13,8 +13,8 @@ export default function Products(props) {
   ));
 
   return (
-    <section className="products">
-      <h1 className="products__header">Products</h1>
+    <section className="products view">
+      <h1 className="products__header view__header">Products</h1>
       <div className="products__wrapper">{productList}</div>
     </section>
   );
