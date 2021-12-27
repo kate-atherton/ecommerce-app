@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
+import Popup from "./Popup";
 
 export default function View(props) {
   const [cartItems, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const [popup, setPopup] = useState(false);
+  const [latestItems, setLatestItems] = useState({ quantity: "", title: "" });
 
   const addToCart = (id, img, price, title, quantity) => {
     const newItem = {
@@ -16,6 +19,8 @@ export default function View(props) {
     };
     setItems([...cartItems, newItem]);
     setTotal(total + price * quantity);
+    setLatestItems({ quantity: quantity, title: title });
+    setPopup(true);
   };
 
   const removeFromCart = (props) => {
@@ -34,6 +39,16 @@ export default function View(props) {
           cartItems={cartItems}
           total={total}
         />
+      )}
+      {popup === true ? (
+        <Popup
+          popup={popup}
+          latestItems={latestItems}
+          delay={10000}
+          setPopup={setPopup}
+        />
+      ) : (
+        <Popup setPopup={setPopup} />
       )}
     </section>
   );
