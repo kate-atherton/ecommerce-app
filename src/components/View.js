@@ -10,23 +10,43 @@ export default function View(props) {
   const [latestItems, setLatestItems] = useState({ quantity: "", title: "" });
 
   const addToCart = (id, img, price, title, quantity) => {
-    const newItem = {
+    let newItem = {
       id: id,
       img: img,
       price: price,
       title: title,
-      quantity: quantity,
+      quantity: parseInt(quantity),
     };
-    setItems([...cartItems, newItem]);
+
+    const matchingIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (matchingIndex !== -1) {
+      cartItems[matchingIndex].quantity += quantity;
+      setItems(cartItems);
+    } else {
+      setItems([...cartItems, newItem]);
+    }
+
     setTotal(total + price * quantity);
     setLatestItems({ quantity: quantity, title: title });
     setPopup(true);
   };
 
-  const removeFromCart = (props) => {
-    const remainingItems = cartItems.filter((item) => item.id !== props.id);
-    setItems(remainingItems);
-    setTotal(total - props.price * props.quantity);
+  const removeFromCart = (id, price, quantity) => {
+    console.log(id);
+    console.log(price);
+    console.log(quantity);
+    const matchingIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (matchingIndex !== -1 && cartItems[matchingIndex].quantity > quantity) {
+      cartItems[matchingIndex].quantity -= quantity;
+      setItems(cartItems);
+    } else {
+      const remainingItems = cartItems.filter((item) => item.id !== id);
+      setItems(remainingItems);
+    }
+
+    setTotal(total - price * quantity);
   };
 
   return (
@@ -36,6 +56,7 @@ export default function View(props) {
       ) : (
         <Cart
           removeFromCart={removeFromCart}
+          addToCart={addToCart}
           cartItems={cartItems}
           total={total}
         />

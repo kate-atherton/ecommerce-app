@@ -10,6 +10,7 @@ export default function Cart(props) {
       img={item.img}
       key={item.id}
       removeFromCart={props.removeFromCart}
+      addToCart={props.addToCart}
     />
   ));
 
