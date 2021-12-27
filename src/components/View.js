@@ -44,7 +44,7 @@ export default function View(props) {
         <Popup
           popup={popup}
           latestItems={latestItems}
-          delay={10000}
+          delay={5000}
           setPopup={setPopup}
         />
       ) : (

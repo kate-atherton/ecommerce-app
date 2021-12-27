@@ -5,7 +5,7 @@ export default function Popup(props) {
     setTimeout(() => {
       props.setPopup(false);
     }, props.delay);
-  }, [props.delay]);
+  }, [props.delay, props]);
 
   if (props.popup === true) {
     return (
