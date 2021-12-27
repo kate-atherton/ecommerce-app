@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
-import Popup from "./Popup";
 
 export default function View(props) {
   const [cartItems, setItems] = useState([]);
@@ -33,9 +32,6 @@ export default function View(props) {
   };
 
   const removeFromCart = (id, price, quantity) => {
-    console.log(id);
-    console.log(price);
-    console.log(quantity);
     const matchingIndex = cartItems.findIndex((item) => item.id === id);
 
     if (matchingIndex !== -1 && cartItems[matchingIndex].quantity > quantity) {
@@ -52,7 +48,14 @@ export default function View(props) {
   return (
     <section>
       {props.page === "products" ? (
-        <Products products={props.data} addToCart={addToCart} />
+        <Products
+          products={props.data}
+          addToCart={addToCart}
+          popup={popup}
+          latestItems={latestItems}
+          delay={5000}
+          setPopup={setPopup}
+        />
       ) : (
         <Cart
           removeFromCart={removeFromCart}
@@ -60,16 +63,6 @@ export default function View(props) {
           cartItems={cartItems}
           total={total}
         />
-      )}
-      {popup === true ? (
-        <Popup
-          popup={popup}
-          latestItems={latestItems}
-          delay={5000}
-          setPopup={setPopup}
-        />
-      ) : (
-        <Popup setPopup={setPopup} />
       )}
     </section>
   );

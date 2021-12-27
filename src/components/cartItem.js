@@ -53,8 +53,3 @@ export default function CartItem(props) {
     </div>
   );
 }
-
-// <p className="cartItem__quantity">
-//   {`Quantity:`}
-//   {props.quantity}
-// </p>
