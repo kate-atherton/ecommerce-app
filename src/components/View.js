@@ -24,6 +24,7 @@ export default function View(props) {
             alt="cart icon"
             onClick={() => props.setPage("cart")}
           />
+          <p>{props.numberInCart}</p>
         </li>
       </ul>
     </header>
