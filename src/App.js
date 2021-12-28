@@ -1,50 +1,85 @@
 import React, { useState } from "react";
 
+import { DATA } from "./data.js";
+
 //image files
 import search from "./static/search.svg";
 import cart from "./static/shopping-cart.svg";
 import monstera from "./static/monstera.jpg";
-
-import { DATA } from "./data.js";
 
 //sass
 import "./Sass/main.scss";
 
 //components
 import View from "./components/View";
+import Main from "./components/Main";
 
 function App() {
+  const [cartItems, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [popup, setPopup] = useState(false);
+  const [latestItems, setLatestItems] = useState({ quantity: "", title: "" });
   const [page, setPage] = useState("products");
+
+  const addToCart = (id, img, price, title, quantity) => {
+    let newItem = {
+      id: id,
+      img: img,
+      price: price,
+      title: title,
+      quantity: parseInt(quantity),
+    };
+
+    const matchingIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (matchingIndex !== -1) {
+      cartItems[matchingIndex].quantity += quantity;
+      setItems(cartItems);
+    } else {
+      setItems([...cartItems, newItem]);
+    }
+
+    setTotal(total + price * quantity);
+    setLatestItems({ quantity: quantity, title: title });
+    setPopup(true);
+  };
+
+  const removeFromCart = (id, price, quantity) => {
+    const remainingItems = cartItems.filter((item) => item.id !== id);
+    setItems(remainingItems);
+
+    setTotal(total - price * quantity);
+  };
+
+  const subtractFromCart = (id, price, quantity) => {
+    const matchingIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (matchingIndex !== -1 && cartItems[matchingIndex].quantity > quantity) {
+      cartItems[matchingIndex].quantity -= quantity;
+      setItems(cartItems);
+    } else {
+      const remainingItems = cartItems.filter((item) => item.id !== id);
+      setItems(remainingItems);
+    }
+
+    setTotal(total - price * quantity);
+  };
 
   return (
     <main className="main">
-      <header className="header">
-        <div className="header__wrapper">
-          <img src={monstera} className="header__logo" alt="logo" />
-          <h1 className="header__title">ALOE ALOE</h1>
-        </div>
-
-        <ul className="header__nav">
-          <li className="header__nav__icon">
-            <img
-              className="header__nav__icon__img"
-              src={search}
-              alt="search icon"
-              onClick={() => setPage("products")}
-            />
-          </li>
-          <li className="header__nav__icon">
-            <img
-              className="header__nav__icon__img"
-              src={cart}
-              alt="cart icon"
-              onClick={() => setPage("cart")}
-            />
-          </li>
-        </ul>
-      </header>
-
-      <View data={DATA} page={page} />
+      <View monstera={monstera} search={search} cart={cart} setPage={setPage} />
+      <Main
+        data={DATA}
+        addToCart={addToCart}
+        subtractFromCart={subtractFromCart}
+        removeFromCart={removeFromCart}
+        cartItems={cartItems}
+        total={total}
+        popup={popup}
+        latestItems={latestItems}
+        setPopup={setPopup}
+        page={page}
+      />
     </main>
   );
 }

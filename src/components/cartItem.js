@@ -27,7 +27,7 @@ export default function CartItem(props) {
           type="button"
           className="product__quantity__btn"
           onClick={() => {
-            props.removeFromCart(props.id, props.price, 1);
+            props.subtractFromCart(props.id, props.price, 1);
             setQuantity(1);
           }}
         >{`-`}</button>
@@ -48,7 +48,9 @@ export default function CartItem(props) {
       <button
         type="button"
         className="cartItem__delete"
-        onClick={() => props.removeFromCart(props.id, props.price, 1)}
+        onClick={() =>
+          props.removeFromCart(props.id, props.price, props.quantity)
+        }
       >{`Delete`}</button>
     </div>
   );

@@ -11,6 +11,7 @@ export default function Cart(props) {
       key={item.id}
       removeFromCart={props.removeFromCart}
       addToCart={props.addToCart}
+      subtractFromCart={props.subtractFromCart}
     />
   ));
 
