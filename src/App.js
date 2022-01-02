@@ -41,21 +41,21 @@ function App() {
 
     const matchingIndex = cartItems.findIndex((item) => item.id === id);
 
-    let numberInCart;
+    let newCartCount;
 
     if (matchingIndex !== -1) {
       cartItems[matchingIndex].quantity += parseInt(quantity);
       setItems(cartItems);
-      numberInCart = sumCart(cartItems);
+      newCartCount = sumCart(cartItems);
     } else {
       setItems([...cartItems, newItem]);
-      numberInCart = sumCart([...cartItems, newItem]);
+      newCartCount = sumCart([...cartItems, newItem]);
     }
 
     setTotal(total + price * quantity);
     setLatestItems({ quantity: quantity, title: title });
     setPopup(true);
-    setNumberInCart(numberInCart);
+    setNumberInCart(newCartCount);
   };
 
   const removeFromCart = (id, price, quantity) => {
@@ -64,26 +64,26 @@ function App() {
 
     setTotal(total - price * quantity);
 
-    let numberInCart = sumCart(remainingItems);
-    setNumberInCart(numberInCart);
+    let newCartCount = sumCart(remainingItems);
+    setNumberInCart(newCartCount);
   };
 
   const subtractFromCart = (id, price, quantity) => {
     const matchingIndex = cartItems.findIndex((item) => item.id === id);
-    let numberInCart;
+    let newCartCount;
 
     if (matchingIndex !== -1 && cartItems[matchingIndex].quantity > quantity) {
       cartItems[matchingIndex].quantity -= quantity;
       setItems(cartItems);
-      numberInCart = sumCart(cartItems);
+      newCartCount = sumCart(cartItems);
     } else {
       const remainingItems = cartItems.filter((item) => item.id !== id);
       setItems(remainingItems);
-      numberInCart = sumCart(remainingItems);
+      newCartCount = sumCart(remainingItems);
     }
 
     setTotal(total - price * quantity);
-    setNumberInCart(numberInCart);
+    setNumberInCart(newCartCount);
   };
 
   return (

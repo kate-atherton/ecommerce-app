@@ -1,15 +1,22 @@
 import Product from "../components/Product.js";
 import Popup from "../components/Popup";
 
-export default function Products(props) {
-  const productList = props.products.map((product) => (
+export default function Products({
+  products,
+  addToCart,
+  popup,
+  latestItems,
+  delay,
+  setPopup,
+}) {
+  const productList = products.map((product) => (
     <Product
       img={product.img}
       price={product.price}
       title={product.title}
       id={product.id}
       key={product.id}
-      addToCart={props.addToCart}
+      addToCart={addToCart}
     />
   ));
 
@@ -17,15 +24,15 @@ export default function Products(props) {
     <section className="products view">
       <h1 className="products__header view__header">Products</h1>
       <div className="products__wrapper">{productList}</div>
-      {props.popup === true ? (
+      {popup === true ? (
         <Popup
-          popup={props.popup}
-          latestItems={props.latestItems}
-          delay={props.delay}
-          setPopup={props.setPopup}
+          popup={popup}
+          latestItems={latestItems}
+          delay={delay}
+          setPopup={setPopup}
         />
       ) : (
-        <Popup setPopup={props.setPopup} />
+        <Popup setPopup={setPopup} />
       )}
     </section>
   );
